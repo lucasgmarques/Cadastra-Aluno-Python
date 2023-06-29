@@ -1,3 +1,5 @@
+# Lucas Garcia Marques
+
 import time
 import os
 
@@ -16,7 +18,7 @@ def limpaTela():
 def calculaIMC(peso, altura):
   try:
     imc = peso / (altura * altura)
-    return imc
+    return round(imc, 2)
   except ZeroDivisionError:
     print("Não é possível dividir por zero.")
 
@@ -24,7 +26,7 @@ def incluiAluno():
   while True:
     nome = input("Digite o nome do aluno (ou 'F' para encerrar): ")
     if nome == "":
-      print("O nome do aluno não pode ser vazio. Digite novamente. ")
+      print("O nome do aluno não pode estar vazio. Digite novamente. ")
       break
     elif nome.upper() == 'F':
       print("Encerrando o cadastro ...\n")
@@ -74,12 +76,12 @@ def listaAluno():
       print("Não há alunos na lista.")
       break
 
-    nome = input("Digite o nome do aluno para pesquisa (ou 'F' para encerrar): ")
+    nome = input("Digite o nome do aluno para pesquisar (ou 'F' para encerrar): ")
 
     if nome.upper() == 'F':
       break
     elif nome == "":
-        print("O nome do aluno não pode ser vazio. Digite novamente. ")
+        print("O nome do aluno não pode estar vazio. Digite novamente. ")
         break
     elif nome not in lst_nome:
       print("Aluno não encontrado.\n")
@@ -124,7 +126,7 @@ def listaAlunoIdade():
   media_imc = sum([lst_imc[i] for i in alunos_idade]) / len(alunos_idade)
   print(f'IMC médio do grupo: {media_imc:.2f}')
 
-def ExcluiAluno():
+def excluiAluno():
   limpaTela()
   nome = input("Digite o nome de um aluno para excluir: ")
 
@@ -167,7 +169,7 @@ def executaOpcao(opcao):
   elif opcao == "4":
     listaAlunoIdade()
   elif opcao == "5":
-    ExcluiAluno()
+    excluiAluno()
   elif opcao == "9":
     print("Encerrando o programa.")
     time.sleep(1)
@@ -180,5 +182,6 @@ def main():
     exibeMenu()
     opcao = leOpcao()
     executaOpcao(opcao)
-    
-main()
+
+if __name__ == '__main__':
+  main()
