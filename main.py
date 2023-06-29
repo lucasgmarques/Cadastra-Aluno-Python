@@ -24,12 +24,15 @@ def calculaIMC(peso, altura):
 
 def incluiAluno():
   while True:
+    print("----- CADASTRO DE ALUNOS -----")
     nome = input("Digite o nome do aluno (ou 'F' para encerrar): ")
     if nome == "":
       print("O nome do aluno não pode estar vazio. Digite novamente. ")
       break
     elif nome.upper() == 'F':
       print("Encerrando o cadastro ...\n")
+      time.sleep(1)
+      limpaTela()
       break
     else:
       idade = int(input("Digite a idade do aluno: "))
@@ -45,6 +48,8 @@ def incluiAluno():
       lst_imc.append(imc)
   
       print("Aluno adicionado com sucesso!\n")
+      time.sleep(1)
+      limpaTela()
 
 def listaAlunos():
   limpaTela()
@@ -62,7 +67,7 @@ def listaAlunos():
         print(f'Peso: {lst_peso[i]}')
         print(f'Altura: {lst_altura[i]}')
         print(f'IMC: {lst_imc[i]:.2f}')
-        print("---")
+        print("------------------------")
   
     media_imc = sum(lst_imc) / len(lst_imc)
     print(f'A média do IMC dos alunos cadastrados: {media_imc:.2f}\n')
