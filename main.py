@@ -1,8 +1,17 @@
+import time
+import os
+
 lst_nome = []
 lst_idade = []
 lst_peso = []
 lst_altura = []
 lst_imc = []
+
+def limpaTela():
+  if os.name == 'nt':
+    _ = os.system('cls')
+  else:
+    _ = os.system('clear')
 
 def calculaIMC(peso, altura):
   try:
@@ -36,6 +45,7 @@ def incluiAluno():
       print("Aluno adicionado com sucesso!\n")
 
 def listaAlunos():
+  limpaTela()
   try:
     if len(lst_nome) == 0:
       print("Não há alunos na lista.")
@@ -57,7 +67,38 @@ def listaAlunos():
   except ZeroDivisionError:
     print("Cadastre alguns alunos ...")
 
+def listaAluno():
+  limpaTela()
+  while True:
+    if len(lst_nome) == 0:
+      print("Não há alunos na lista.")
+      break
+
+    nome = input("Digite o nome do aluno para pesquisa (ou 'F' para encerrar): ")
+
+    if nome.upper() == 'F':
+      break
+    elif nome == "":
+        print("O nome do aluno não pode ser vazio. Digite novamente. ")
+        break
+    elif nome not in lst_nome:
+      print("Aluno não encontrado.\n")
+      return
+  
+    i = lst_nome.index(nome)
+    
+    print("--------------------------------")
+    print("INFORMAÇÕES DO ALUNO CADASTRADO:")
+    print("--------------------------------")
+    print(f'Aluno {i + 1}:')
+    print(f'Nome: {lst_nome[i]}')
+    print(f'Idade: {lst_idade[i]}')
+    print(f'Peso: {lst_peso[i]}')
+    print(f'Altura: {lst_altura[i]}')
+    print(f'IMC: {lst_imc[i]:.2f}')
+
 def listaAlunoIdade():
+  limpaTela()
   idade = int(input("Digite a idade do alunos: "))
   alunos_idade = []
 
@@ -84,6 +125,7 @@ def listaAlunoIdade():
   print(f'IMC médio do grupo: {media_imc:.2f}')
 
 def ExcluiAluno():
+  limpaTela()
   nome = input("Digite o nome de um aluno para excluir: ")
 
   if len(lst_nome) == 0:
@@ -102,28 +144,37 @@ def ExcluiAluno():
 
   print(f'O aluno {nome} foi excluído!\n')
 
+def exibeMenu():
+  print("---- CADASTRO DE ALUNOS ----")
+  print("1 - Incluir Aluno")
+  print("2 - Listar todos alunos e seus dados")
+  print("3 - Listar os dados de um aluno")
+  print("4 - Listar os dados de todos alunos de uma determinada idade")
+  print("5 - Excluir um aluno")
+  print("9 - Fim")
+
+def leOpcao():
+  opcao = int(input("Digite a opção desejada: "))
+  return opcao
+
 def main():
   while True:
-    print("---- CADASTRO DE ALUNOS ----")
-    print("1 - Incluir Aluno")
-    print("2 - Listar todos alunos e seus dados")
-    print("3 - Listar os dados de um aluno")
-    print("4 - Listar os dados de todos alunos de uma determinada idade")
-    print("5 - Excluir um aluno")
-    print("9 - Fim")
-
-    opcao = int(input("Digite a opção desejada: "))
+    exibeMenu()
+    opcao = leOpcao()
   
     if opcao == 1:
       incluiAluno()
     elif opcao == 2:
       listaAlunos()
+    elif opcao == 3:
+      listaAluno()
     elif opcao == 4:
       listaAlunoIdade()
     elif opcao == 5:
       ExcluiAluno()
     elif opcao == 9:
-      print("Encerrando o  programa.")
+      print("Encerrando o programa.")
+      time.sleep(1)
       break
     else:
       print("Opção inválida. Tente novamente.")
