@@ -154,30 +154,31 @@ def exibeMenu():
   print("9 - Fim")
 
 def leOpcao():
-  opcao = int(input("Digite a opção desejada: "))
+  opcao = input("Digite a opção desejada: ")
   return opcao
+  
+def executaOpcao(opcao):
+  if opcao == "1":
+    incluiAluno()
+  elif opcao == "2":
+    listaAlunos()
+  elif opcao == "3":
+    listaAluno()
+  elif opcao == "4":
+    listaAlunoIdade()
+  elif opcao == "5":
+    ExcluiAluno()
+  elif opcao == "9":
+    print("Encerrando o programa.")
+    time.sleep(1)
+    quit()
+  else:
+    print("Opção inválida. Tente novamente.")
 
 def main():
   while True:
     exibeMenu()
     opcao = leOpcao()
-  
-    if opcao == 1:
-      incluiAluno()
-    elif opcao == 2:
-      listaAlunos()
-    elif opcao == 3:
-      listaAluno()
-    elif opcao == 4:
-      listaAlunoIdade()
-    elif opcao == 5:
-      ExcluiAluno()
-    elif opcao == 9:
-      print("Encerrando o programa.")
-      time.sleep(1)
-      break
-    else:
-      print("Opção inválida. Tente novamente.")
-
-# Chama o programa
+    executaOpcao(opcao)
+    
 main()
